@@ -2,6 +2,7 @@ import { View, Text, FlatList } from "react-native";
 import { s } from "./TasksScreen.style";
 import Header from "../../components/Header/Header";
 import { useState } from "react";
+import TaskTile from "../../components/TaskTile/TaskTile";
 
 export default function TasksScreen() {
   const [tasks, setTasks] = useState([
@@ -23,13 +24,7 @@ export default function TasksScreen() {
         data={tasks}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Text
-            style={{
-              textDecorationLine: item.isCompleted ? "line-through" : "none",
-            }}
-          >
-            {item.title}
-          </Text>
+          <TaskTile task={item} />
         )}
       />
   );
