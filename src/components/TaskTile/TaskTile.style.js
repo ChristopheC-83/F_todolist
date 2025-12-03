@@ -7,7 +7,7 @@ export const s = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 10,
-        paddingVertical: 8,
+    paddingVertical: 8,
     marginBottom: 10,
   },
   subContainer: {
@@ -19,6 +19,9 @@ export const s = StyleSheet.create({
   },
   checkIcon: { width: 24, height: 24 },
   title: { fontSize: 18, flexShrink: 1 },
+  completedTitle: {
+    textDecorationLine: "line-through",
+  },
   BinIcon: {
     width: 24,
     height: 24,

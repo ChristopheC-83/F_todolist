@@ -1,24 +1,37 @@
-import { View, Text, TextInput, Button, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { s } from "./TaskForm.style";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-export default function TaskForm() {
-  const [title, setTitle] = useState();
+export default function TaskForm({ addTask }) {
+  const [title, setTitle] = useState("");
+  const inputRef = useRef(null);
 
-  function handleInput(text) {
-    setTitle(text);
+  function handleAddTask() {
+    if (!title.trim()) return;
+
+    addTask(title.trim());
+    setTitle("");
+
+    // Rétablir le focus après ajout pour garder le clavier ouvert
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 10); // petit délai pour que RN ne blur pas l’input
   }
 
   return (
     <View style={s.container}>
       <TextInput
+        ref={inputRef}
         placeholder="Nouvelle tâche"
-        onChange={handleInput}
+        onChangeText={setTitle}
         value={title}
         style={s.input}
+        returnKeyType="done"
+        onSubmitEditing={handleAddTask}
       />
       <Pressable
-        onPress={() => {}}
+        onPress={handleAddTask}
+        android_disableSound // optionnel
         style={s.btn}
       >
         <Text style={s.textBtn}>Ajouter</Text>
